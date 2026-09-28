@@ -1,6 +1,6 @@
 # Site settings for GitHub Pages (Jekyll)
-title: Your anonymous survey name
-description: Generate an anonymous name to use in all three parts of the course survey.
+title: Your linking key
+description: Generate an anonymous linking key to use in all three forms.
 lang: en
 
 # The site is a single self-contained HTML page, so no theme or plugins are needed.
