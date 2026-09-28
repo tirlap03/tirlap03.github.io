@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Your anonymous survey name</title>
+<title>Your linking key</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
@@ -16,7 +16,6 @@
     --ticket-edge: #E2B93B;
     --accent: #2E6F5E;
     --accent-ink: #FFFFFF;
-    --hole: var(--paper);
     box-sizing: border-box;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -65,27 +64,17 @@
     margin: 0 0 0.75rem;
   }
   .intro { color: var(--ink-soft); margin: 0 0 2rem; max-width: 60ch; }
+  .intro p { margin: 0 0 0.6rem; }
+  .intro p:last-child { margin-bottom: 0; }
 
-  /* The ticket */
+  /* The key card */
   .ticket {
-    position: relative;
     background: var(--ticket);
     color: #1F2A44;
     border-radius: 6px;
-    padding: 1.5rem 1.5rem 1.25rem;
+    padding: 1.5rem;
     box-shadow: 0 2px 0 var(--ticket-edge);
   }
-  .ticket::before, .ticket::after {
-    content: "";
-    position: absolute;
-    top: calc(100% - 4.1rem);
-    width: 1.4rem; height: 1.4rem;
-    border-radius: 50%;
-    background: var(--hole);
-  }
-  .ticket::before { left: -0.7rem; }
-  .ticket::after { right: -0.7rem; }
-  .ticket-label { font-size: 0.95rem; margin: 0 0 0.35rem; }
   .name {
     font-family: "Bricolage Grotesque", "Atkinson Hyperlegible", system-ui, sans-serif;
     font-weight: 800;
@@ -100,20 +89,6 @@
   @keyframes stamp {
     0% { transform: scale(1.12); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
-  }
-  .stub {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 2px dashed rgba(31,42,68,.35);
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-  .part {
-    font-size: 0.9rem;
-    border: 1.5px solid rgba(31,42,68,.55);
-    border-radius: 999px;
-    padding: 0.15rem 0.7rem;
   }
 
   .actions {
@@ -138,11 +113,12 @@
   }
   .primary { background: var(--accent); color: var(--accent-ink); }
   .secondary { background: transparent; color: var(--ink); }
-  button:focus-visible, .btn:focus-visible, input:focus-visible {
+  button:focus-visible, .btn:focus-visible {
     outline: 3px solid var(--ink);
     outline-offset: 3px;
   }
   .status { min-height: 1.5em; margin: 0.75rem 0 0; color: var(--accent); font-weight: 700; }
+
 
   .new {
     margin-top: 2.25rem;
@@ -172,32 +148,34 @@
 </head>
 <body>
 <main>
-  <h1>Your anonymous survey name</h1>
-  <p class="intro">Use this name in all three parts of the survey. It isn't linked to you in any way, so make sure you keep it somewhere safe.</p>
+  <h1>Your linking key</h1>
+  <div class="intro">
+    <p>You need this linking key for the next forms.</p>
+    <p>Please write this linking key down somewhere so that you can find it again. For example, write it in your phone notes, or email it to yourself.</p>
+  </div>
 
-  <section class="ticket" aria-live="polite">
+  <section class="ticket" aria-live="polite" aria-label="Your linking key">
     <p class="name" id="name"></p>
-    <div class="stub" aria-label="Use it in all three parts">
-    </div>
   </section>
 
   <div class="actions">
-    <button class="primary" id="copy" type="button">Copy name</button>
+    <button class="primary" id="copy" type="button">Copy linking key</button>
     <a class="btn secondary" id="email" href="#" target="_blank" rel="noopener">Email it to myself</a>
   </div>
   <p class="status" id="status" role="status"></p>
 
+
   <div class="new">
-    <p>This page remembers your name on this device, so you can come back to it. You can also write it down or take a screenshot.</p>
-    <button class="linkish" id="ask-new" type="button">I need a different name</button>
+    <p>This page remembers your linking key on this device, so you can come back to it. You can also take a screenshot.</p>
+    <button class="linkish" id="ask-new" type="button">I need a different linking key</button>
     <div class="confirm" id="confirm">
-      <span>Only do this before you start Part 1. Your current name will be replaced.</span>
-      <button class="secondary" id="do-new" type="button">Give me a new name</button>
-      <button class="secondary" id="keep" type="button">Keep my name</button>
+      <span>Only do this before you answer the first form. Your current linking key will be replaced.</span>
+      <button class="secondary" id="do-new" type="button">Give me a new linking key</button>
+      <button class="secondary" id="keep" type="button">Keep my linking key</button>
     </div>
   </div>
 
-  <p class="privacy">Nothing is sent to your teacher or stored online. The name is created in your browser, and the email button opens your own email app.</p>
+  <p class="privacy">Nothing is sent to us or stored online. The linking key is created in your browser, and the email button opens your own email app.</p>
 </main>
 
 <script>
@@ -238,7 +216,7 @@
     try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
   }
   function save(n) {
-    try { localStorage.setItem(STORAGE_KEY, n); } catch (e) { /* storage unavailable; name still shown */ }
+    try { localStorage.setItem(STORAGE_KEY, n); } catch (e) { /* storage unavailable; key still shown */ }
   }
 
   function show(n, animate) {
@@ -248,9 +226,9 @@
       void nameEl.offsetWidth;
       nameEl.classList.add("fresh");
     }
-    const subject = "My anonymous survey name";
-    const body = "My anonymous survey name is: " + n + "\n\n" +
-      "Use this exact name in Part 1, Part 2 and Part 3 of the survey.";
+    const subject = "My linking key";
+    const body = "My linking key is: " + n + "\n\n" +
+      "Use this exact linking key in all three forms.";
     emailEl.href = "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
   }
 
@@ -274,7 +252,7 @@
       document.body.removeChild(t);
     }
     statusEl.textContent = ok ? "Copied " + current + " to your clipboard."
-                              : "Copying isn't available here. Select the name and copy it, or write it down.";
+                              : "Copying isn't available here. Select the linking key and copy it, or write it down.";
   });
 
   emailEl.addEventListener("click", () => {
@@ -291,7 +269,7 @@
     save(current);
     show(current, true);
     confirmEl.classList.remove("show");
-    statusEl.textContent = "Your new name is " + current + ".";
+    statusEl.textContent = "Your new linking key is " + current + ".";
   });
 </script>
 </body>
