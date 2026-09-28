@@ -1,3 +1,18 @@
-theme: jekyll-theme-minimal
-title: Octocat's homepage
-description: Bookmark this to keep an eye on my project updates!
+# Site settings for GitHub Pages (Jekyll)
+title: Your anonymous survey name
+description: Generate an anonymous name to use in all three parts of the course survey.
+lang: en
+
+# The site is a single self-contained HTML page, so no theme or plugins are needed.
+theme: null
+plugins: []
+
+# Serve the page as-is. index.html has no front matter, so Jekyll copies it unchanged.
+markdown: kramdown
+
+# Keep repository housekeeping files off the published site.
+exclude:
+  - README.md
+  - LICENSE
+  - .gitignore
+  - .vscode/
