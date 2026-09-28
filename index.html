@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your anonymous survey name</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #E9EEEC;
+    --ink: #1F2A44;
+    --ink-soft: #52607A;
+    --ticket: #F6D365;
+    --ticket-edge: #E2B93B;
+    --accent: #2E6F5E;
+    --accent-ink: #FFFFFF;
+    --hole: var(--paper);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #151B24;
+      --ink: #E8ECF2;
+      --ink-soft: #A3AEC2;
+      --ticket: #E8C454;
+      --ticket-edge: #C9A231;
+      --accent: #5FB39B;
+      --accent-ink: #0F1A17;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #151B24;
+    --ink: #E8ECF2;
+    --ink-soft: #A3AEC2;
+    --ticket: #E8C454;
+    --ticket-edge: #C9A231;
+    --accent: #5FB39B;
+    --accent-ink: #0F1A17;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  *, *::before, *::after { box-sizing: inherit; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+  }
+  main {
+    max-width: 34rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 3rem;
+  }
+  h1 {
+    font-family: "Bricolage Grotesque", "Atkinson Hyperlegible", system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.9rem, 6vw, 2.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.75rem;
+  }
+  .intro { color: var(--ink-soft); margin: 0 0 2rem; max-width: 60ch; }
+
+  /* The ticket */
+  .ticket {
+    position: relative;
+    background: var(--ticket);
+    color: #1F2A44;
+    border-radius: 6px;
+    padding: 1.5rem 1.5rem 1.25rem;
+    box-shadow: 0 2px 0 var(--ticket-edge);
+  }
+  .ticket::before, .ticket::after {
+    content: "";
+    position: absolute;
+    top: calc(100% - 4.1rem);
+    width: 1.4rem; height: 1.4rem;
+    border-radius: 50%;
+    background: var(--hole);
+  }
+  .ticket::before { left: -0.7rem; }
+  .ticket::after { right: -0.7rem; }
+  .ticket-label { font-size: 0.95rem; margin: 0 0 0.35rem; }
+  .name {
+    font-family: "Bricolage Grotesque", "Atkinson Hyperlegible", system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 9vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0;
+    word-break: break-word;
+    min-height: 1.1em;
+  }
+  .name.fresh { animation: stamp 420ms cubic-bezier(.2,.9,.3,1.2); }
+  @keyframes stamp {
+    0% { transform: scale(1.12); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .stub {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 2px dashed rgba(31,42,68,.35);
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .part {
+    font-size: 0.9rem;
+    border: 1.5px solid rgba(31,42,68,.55);
+    border-radius: 999px;
+    padding: 0.15rem 0.7rem;
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  button, .btn {
+    font: inherit;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid var(--accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+  }
+  .primary { background: var(--accent); color: var(--accent-ink); }
+  .secondary { background: transparent; color: var(--ink); }
+  button:focus-visible, .btn:focus-visible, input:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+  }
+  .status { min-height: 1.5em; margin: 0.75rem 0 0; color: var(--accent); font-weight: 700; }
+
+  .new {
+    margin-top: 2.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+  .new p { margin: 0 0 0.75rem; }
+  .linkish {
+    background: none; border: none; padding: 0; min-height: 0;
+    color: var(--ink); text-decoration: underline; font-weight: 700;
+  }
+  .confirm { display: none; margin-top: 0.75rem; }
+  .confirm.show { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .confirm button { padding: 0.55rem 0.9rem; min-height: 0; }
+
+  .privacy { margin-top: 2rem; font-size: 0.9rem; color: var(--ink-soft); }
+
+  @media (max-width: 420px) {
+    .actions { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .name.fresh { animation: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Your anonymous survey name</h1>
+  <p class="intro">Use this name in all three parts of the survey. It isn't linked to you in any way, so make sure you keep it somewhere safe.</p>
+
+  <section class="ticket" aria-live="polite">
+    <p class="name" id="name"></p>
+    <div class="stub" aria-label="Use it in all three parts">
+    </div>
+  </section>
+
+  <div class="actions">
+    <button class="primary" id="copy" type="button">Copy name</button>
+    <a class="btn secondary" id="email" href="#" target="_blank" rel="noopener">Email it to myself</a>
+  </div>
+  <p class="status" id="status" role="status"></p>
+
+  <div class="new">
+    <p>This page remembers your name on this device, so you can come back to it. You can also write it down or take a screenshot.</p>
+    <button class="linkish" id="ask-new" type="button">I need a different name</button>
+    <div class="confirm" id="confirm">
+      <span>Only do this before you start Part 1. Your current name will be replaced.</span>
+      <button class="secondary" id="do-new" type="button">Give me a new name</button>
+      <button class="secondary" id="keep" type="button">Keep my name</button>
+    </div>
+  </div>
+
+  <p class="privacy">Nothing is sent to your teacher or stored online. The name is created in your browser, and the email button opens your own email app.</p>
+</main>
+
+<script>
+  // Word lists avoid easily confused spellings and anything that could read as rude.
+  const ADJECTIVES = ["Amber","Brave","Breezy","Bright","Calm","Clever","Cosy","Curious","Daring","Dusky",
+    "Eager","Fancy","Fluffy","Frosty","Gentle","Golden","Grand","Happy","Honest","Hopeful",
+    "Jolly","Keen","Kind","Lively","Lucky","Merry","Mighty","Misty","Noble","Olive",
+    "Patient","Plucky","Polite","Proud","Quick","Quiet","Rapid","Rosy","Rusty","Silver",
+    "Sleepy","Smart","Snowy","Sparkly","Speedy","Steady","Sunny","Swift","Tidy","Tiny",
+    "Velvet","Violet","Warm","Wild","Windy","Wise","Witty","Zesty","Cheerful","Crimson"];
+  const ANIMALS = ["Badger","Beaver","Bison","Camel","Cheetah","Crane","Dolphin","Eagle","Falcon","Ferret",
+    "Finch","Fox","Gecko","Giraffe","Heron","Hedgehog","Jaguar","Kiwi","Koala","Lemur",
+    "Lynx","Magpie","Marten","Meerkat","Moose","Narwhal","Otter","Owl","Panda","Parrot",
+    "Pelican","Penguin","Puffin","Rabbit","Raven","Reindeer","Robin","Salmon","Seal","Sparrow",
+    "Squirrel","Stork","Swan","Tiger","Toucan","Turtle","Walrus","Whale","Wolf","Wombat",
+    "Yak","Zebra","Lobster","Hamster","Pony","Orca","Llama","Beetle","Octopus","Starfish"];
+
+  const STORAGE_KEY = "survey-name-v1";
+  const nameEl = document.getElementById("name");
+  const statusEl = document.getElementById("status");
+  const emailEl = document.getElementById("email");
+
+  function randInt(max) {
+    if (window.crypto && crypto.getRandomValues) {
+      const a = new Uint32Array(1);
+      crypto.getRandomValues(a);
+      return a[0] % max;
+    }
+    return Math.floor(Math.random() * max);
+  }
+
+  function makeName() {
+    const num = 10 + randInt(90); // 10–99
+    return ADJECTIVES[randInt(ADJECTIVES.length)] + ANIMALS[randInt(ANIMALS.length)] + num;
+  }
+
+  function load() {
+    try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
+  }
+  function save(n) {
+    try { localStorage.setItem(STORAGE_KEY, n); } catch (e) { /* storage unavailable; name still shown */ }
+  }
+
+  function show(n, animate) {
+    nameEl.textContent = n;
+    if (animate) {
+      nameEl.classList.remove("fresh");
+      void nameEl.offsetWidth;
+      nameEl.classList.add("fresh");
+    }
+    const subject = "My anonymous survey name";
+    const body = "My anonymous survey name is: " + n + "\n\n" +
+      "Use this exact name in Part 1, Part 2 and Part 3 of the survey.";
+    emailEl.href = "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  }
+
+  let current = load();
+  if (!current) { current = makeName(); save(current); show(current, true); }
+  else { show(current, false); }
+
+  document.getElementById("copy").addEventListener("click", async () => {
+    let ok = false;
+    try {
+      await navigator.clipboard.writeText(current);
+      ok = true;
+    } catch (e) {
+      const t = document.createElement("textarea");
+      t.value = current;
+      t.setAttribute("readonly", "");
+      t.style.position = "absolute"; t.style.left = "-9999px";
+      document.body.appendChild(t);
+      t.select();
+      try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
+      document.body.removeChild(t);
+    }
+    statusEl.textContent = ok ? "Copied " + current + " to your clipboard."
+                              : "Copying isn't available here. Select the name and copy it, or write it down.";
+  });
+
+  emailEl.addEventListener("click", () => {
+    statusEl.textContent = "Opening your email app. Send the message to your own address.";
+  });
+
+  const confirmEl = document.getElementById("confirm");
+  document.getElementById("ask-new").addEventListener("click", () => confirmEl.classList.add("show"));
+  document.getElementById("keep").addEventListener("click", () => confirmEl.classList.remove("show"));
+  document.getElementById("do-new").addEventListener("click", () => {
+    let next = makeName();
+    while (next === current) next = makeName();
+    current = next;
+    save(current);
+    show(current, true);
+    confirmEl.classList.remove("show");
+    statusEl.textContent = "Your new name is " + current + ".";
+  });
+</script>
+</body>
+</html>
