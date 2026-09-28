@@ -113,12 +113,43 @@
   }
   .primary { background: var(--accent); color: var(--accent-ink); }
   .secondary { background: transparent; color: var(--ink); }
-  button:focus-visible, .btn:focus-visible {
+  button:focus-visible, .btn:focus-visible, summary:focus-visible {
     outline: 3px solid var(--ink);
     outline-offset: 3px;
   }
   .status { min-height: 1.5em; margin: 0.75rem 0 0; color: var(--accent); font-weight: 700; }
 
+
+  /* "How does the linking key work?" dropdown */
+  .explain {
+    margin-top: 1.75rem;
+    border: 1.5px solid color-mix(in srgb, var(--ink) 22%, transparent);
+    border-radius: 8px;
+  }
+  .explain summary {
+    cursor: pointer;
+    font-weight: 700;
+    padding: 0.85rem 1rem;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .explain summary::-webkit-details-marker { display: none; }
+  .explain summary::after {
+    content: "+";
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--accent);
+  }
+  .explain[open] summary::after { content: "\2212"; }
+  .explain p {
+    margin: 0;
+    padding: 0 1rem 1rem;
+    color: var(--ink-soft);
+    max-width: 60ch;
+  }
 
   .new {
     margin-top: 2.25rem;
@@ -163,6 +194,11 @@
     <a class="btn secondary" id="email" href="#" target="_blank" rel="noopener">Email it to myself</a>
   </div>
   <p class="status" id="status" role="status"></p>
+
+  <details class="explain">
+    <summary>How does the linking key work?</summary>
+    <p>You need a linking key for us to follow your answers through the three different forms. The linking key works as your unique identifier, but without any connection to your actual identity, so that you stay anonymous. We use the linking key to be able to delete your data if you request deletion.</p>
+  </details>
 
 
   <div class="new">
